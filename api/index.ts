@@ -14,5 +14,10 @@ export default async function handler(req: any, res: any) {
       return;
     }
   }
-  app(req, res);
+  return new Promise<void>((resolve, reject) => {
+    app(req, res);
+    res.on("finish", resolve);
+    res.on("close", resolve);
+    res.on("error", reject);
+  });
 }
