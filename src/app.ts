@@ -2,8 +2,8 @@ import express, { type Express } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-import pinoHttp from "pino-http";
-import { logger } from "./lib/logger.js";
+// import pinoHttp from "pino-http";
+// import { logger } from "./lib/logger.js";
 import v1Router from "./routes/v1/index.js";
 import healthRouter from "./routes/health.js";
 import { errorHandler } from "./middleware/errorHandler.js";
@@ -35,19 +35,19 @@ const generalLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-app.use(
-  pinoHttp({
-    logger,
-    serializers: {
-      req(req) {
-        return { id: req.id, method: req.method, url: req.url?.split("?")[0] };
-      },
-      res(res) {
-        return { statusCode: res.statusCode };
-      },
-    },
-  })
-);
+// app.use(
+//   pinoHttp({
+//     logger,
+//     serializers: {
+//       req(req) {
+//         return { id: req.id, method: req.method, url: req.url?.split("?")[0] };
+//       },
+//       res(res) {
+//         return { statusCode: res.statusCode };
+//       },
+//     },
+//   })
+// );
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
