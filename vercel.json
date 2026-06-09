@@ -2,11 +2,11 @@
   "installCommand": "pnpm install",
   "builds": [
     {
-      "src": "api/index.ts",
+      "src": "src/index.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "api/index.ts" }
+    { "src": "/(.*)", "dest": "src/index.ts" }
   ]
 }
