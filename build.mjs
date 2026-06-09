@@ -10,7 +10,7 @@ async function buildAll() {
   await rm(distDir, { recursive: true, force: true });
 
   await esbuild({
-    entryPoints: [path.resolve(artifactDir, "index.ts")],
+    entryPoints: [path.resolve(artifactDir, "src/index.ts")],
     platform: "node",
     bundle: true,
     format: "esm",
@@ -97,6 +97,9 @@ async function buildAll() {
       "electron",
       "pino",
       "pino-pretty",
+      "pino-http",
+      "helmet",
+      "express-rate-limit",
       "thread-stream",
     ],
     sourcemap: "linked",
