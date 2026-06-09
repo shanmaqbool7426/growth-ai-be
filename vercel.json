@@ -1,5 +1,8 @@
 {
   "installCommand": "npm install",
+  "env": {
+    "NODE_ENV": "production"
+  },
   "routes": [
     { "src": "/(.*)", "dest": "/api" }
   ]

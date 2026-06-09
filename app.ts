@@ -1,4 +1,4 @@
-import express, { type Express } from "express";
+import express, { type Express, type Request, type Response, type NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
@@ -13,7 +13,7 @@ let dbConnected = false;
 
 const app: Express = express();
 
-app.use(helmet());
+app.use(helmet() as any);
 app.use(
   cors({
     origin: process.env["FRONTEND_URL"] || "*",
@@ -27,33 +27,33 @@ const authLimiter = rateLimit({
   message: { success: false, message: "Too many requests, please try again later" },
   standardHeaders: true,
   legacyHeaders: false,
-});
+}) as any;
 
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 200,
   standardHeaders: true,
   legacyHeaders: false,
-});
+}) as any;
 
 app.use(
   pinoHttp({
     logger,
     serializers: {
-      req(req) {
+      req(req: any) {
         return { id: req.id, method: req.method, url: req.url?.split("?")[0] };
       },
-      res(res) {
+      res(res: any) {
         return { statusCode: res.statusCode };
       },
     },
-  })
+  }) as any
 );
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-app.use(async (_req, _res, next) => {
+app.use(async (_req: Request, _res: Response, next: NextFunction) => {
   if (!dbConnected) {
     try {
       await connectDB();
@@ -74,7 +74,7 @@ app.use("/api/v1", generalLimiter);
 
 app.use("/api/v1", v1Router);
 
-app.use((_req, res) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).json({ success: false, message: "Route not found" });
 });
 
