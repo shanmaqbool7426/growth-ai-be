@@ -17,7 +17,11 @@ const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env["FRONTEND_URL"] || "*",
+    origin: [
+      "http://localhost:5000",
+      "https://growthssmai.vercel.app",
+      ...(process.env["FRONTEND_URL"] ? [process.env["FRONTEND_URL"]] : []),
+    ],
     credentials: true,
   })
 );
