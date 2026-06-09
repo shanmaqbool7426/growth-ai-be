@@ -1,19 +1,13 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "tsBuildInfoFile": ".tsbuildinfo",
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
-    "strict": true,
     "skipLibCheck": true,
-    "outDir": "dist",
-    "rootDir": ".",
+    "noEmit": true,
     "types": ["node"],
     "resolveJsonModule": true,
-    "declaration": true,
-    "sourceMap": true,
     "forceConsistentCasingInFileNames": true
   },
   "include": ["app.ts", "index.ts", "src", "api"]

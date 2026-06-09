@@ -7,4 +7,4 @@ dist
 build
 *.log
 .DS_Store
-tsconfig.json
+
