@@ -1,15 +1,13 @@
 {
   "installCommand": "pnpm install",
   "buildCommand": "node ./build.mjs",
-  "functions": {
-    "dist/index.mjs": {
-      "includeFiles": "dist/**"
-    }
-  },
   "builds": [
     {
       "src": "dist/index.mjs",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": "dist/**"
+      }
     }
   ],
   "routes": [
