@@ -3,7 +3,7 @@ import { TRANSACTION_TYPES } from "../constants/index.js";
 
 export interface ITransaction extends Document {
   user: mongoose.Types.ObjectId;
-  type: keyof typeof TRANSACTION_TYPES;
+  type: (typeof TRANSACTION_TYPES)[keyof typeof TRANSACTION_TYPES];
   amount: number;
   balanceBefore: number;
   balanceAfter: number;

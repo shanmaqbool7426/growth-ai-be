@@ -13,7 +13,7 @@ export interface IOrder extends Document {
   link: string;
   quantity: number;
   amount: number;
-  status: keyof typeof ORDER_STATUS;
+  status: (typeof ORDER_STATUS)[keyof typeof ORDER_STATUS];
   startCount?: number;
   remains?: number;
   notes?: string;

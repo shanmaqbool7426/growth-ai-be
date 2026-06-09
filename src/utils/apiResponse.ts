@@ -18,7 +18,7 @@ export function sendSuccess(
     success: true,
     message,
     data,
-    ...(meta && { meta }),
+    ...(meta ? { meta } : undefined),
   });
 }
 
@@ -31,7 +31,7 @@ export function sendError(
   return res.status(statusCode).json({
     success: false,
     message,
-    ...(errors && { errors }),
+    ...(errors ? { errors } : undefined),
   });
 }
 
