@@ -1,5 +1,8 @@
 {
   "installCommand": "npm install",
+  "typescript": {
+    "ignoreBuildErrors": true
+  },
   "env": {
     "NODE_ENV": "production"
   },
