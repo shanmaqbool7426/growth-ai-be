@@ -1,10 +1,10 @@
 {
-  "name": "@workspace/api-server",
-  "version": "0.0.0",
+  "name": "api-server",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development PORT=8080 pnpm run build && cross-env NODE_ENV=development PORT=8080 pnpm run start",
+    "dev": "cross-env NODE_ENV=development PORT=8080 npm run build && cross-env NODE_ENV=development PORT=8080 npm run start",
     "build": "node ./build.mjs",
     "start": "node --enable-source-maps ./dist/index.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit"
