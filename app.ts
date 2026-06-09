@@ -7,6 +7,9 @@ import { logger } from "./src/lib/logger.js";
 import v1Router from "./src/routes/v1/index.js";
 import healthRouter from "./src/routes/health.js";
 import { errorHandler } from "./src/middleware/errorHandler.js";
+import { connectDB } from "./src/config/db.js";
+
+let dbConnected = false;
 
 const app: Express = express();
 
@@ -49,6 +52,19 @@ app.use(
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
+
+app.use(async (_req, _res, next) => {
+  if (!dbConnected) {
+    try {
+      await connectDB();
+      dbConnected = true;
+    } catch (err) {
+      next(err as Error);
+      return;
+    }
+  }
+  next();
+});
 
 app.use("/api", healthRouter);
 
